@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    
+}
+
+html {
+    background-color: rgb(36, 36, 36);
+}
