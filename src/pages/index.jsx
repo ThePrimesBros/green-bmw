@@ -3,12 +3,27 @@ import VerticalArtcile from '@/components/VerticalArticle/VerticalArtcile'
 import IMG1 from '../../public/bg_header.jpg'
 
 export default function Home() {
+    const page = React.useMemo(() => {
+        if (typeof window !== 'undefined') return window
+    }, [])
+
+    const checkFocus = React.useCallback((video) => {
+        if (page && page.document.hasFocus()) video?.play() 
+        else video?.pause()
+    }, [page])
+
     return (
         <React.Fragment>
             <div className="w-full h-screen">
                 <header className="h-full -mt-24 relative">
                     <div className="fixed">
-                        <video loop muted autoPlay className='w-screen h-screen object-cover fixed z-0'>
+                        <video 
+                            loop 
+                            muted 
+                            className='w-screen h-screen object-cover fixed z-0'
+                            id="video"
+                            ref={checkFocus}
+                        >
                             <source src="/bmw_vid_header.mp4" type='video/mp4' />
                         </video>
                         <h1 className="uppercase top-28 left-32 absolute text-3xl font-extrabold tracking-wider text-slate-200 w-screen">
