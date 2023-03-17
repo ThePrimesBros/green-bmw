@@ -9,7 +9,7 @@ const VerticalArtcile = ({ reversed, img, text, title }) => {
                     <Image src={img} alt="" width={'auto'} height={'auto'} loading="lazy" />
                 </div>
                 <div>
-                    <h1>{title}</h1>
+                    <h1 className="text-white font-bold">{title}</h1>
                     {text}
                 </div>
             </div>
