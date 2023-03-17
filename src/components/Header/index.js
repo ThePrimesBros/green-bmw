@@ -15,7 +15,7 @@ export default function Header() {
                 <video
                     loop
                     muted
-                    className='w-screen h-full top-20 object-cover fixed z-0'
+                    className='w-full top-20 object-cover fixed z-0'
                     id="video"
                     ref={checkFocus}
                 >

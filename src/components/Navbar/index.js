@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function Navbar() {
     const router = useRouter();
     return (
-        <nav className="flex items-center justify-between flex-wrap p-6 fixed w-full z-40 bg-main-100">
+        <nav className="flex items-center justify-between flex-wrap p-6 w-full z-40 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm">
             <div className="flex items-center text-white w-32 justify-center h-full space-x-2" onClick={() => router.push('/')}>
                 <span className="font-semibold text-xl tracking-tight">BMW</span>
                 <Image src="/bmw_logo.png" alt="BMW Logo" width={40} height={40} loading="lazy" />
@@ -20,10 +20,10 @@ export default function Navbar() {
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="lg:flex-grow uppercase tracking-wide space-x-3">
-                    <Link href="#header" className="block min-w-[5rem] text-center lg:inline-block lg:mt-0 text-white hover:text-blue-400">
+                    <Link href="/#header" className="block min-w-[5rem] text-center lg:inline-block lg:mt-0 text-white hover:text-blue-400">
                         Home
                     </Link>
-                    <Link href="#responsive-header" className="block min-w-[5rem] text-center lg:inline-block lg:mt-0 text-white hover:text-blue-400">
+                    <Link href="/products" className="block min-w-[5rem] text-center lg:inline-block lg:mt-0 text-white hover:text-blue-400">
                         Produits
                     </Link>
                 </div>

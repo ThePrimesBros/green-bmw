@@ -9,7 +9,7 @@ export default function Home() {
     return (
         <React.Fragment>
             <Header />
-            <div className="py-10  space-y-10 z-10 relative bg-main-100 h-screen" id='article-section'>
+            <div className="py-10 space-y-10 z-10 relative bg-main-100 h-full" id='article-section'>
                 <VerticalArtcile
                     img={IMG1}
                     title={"LE PLAISIR DE LA CONDUITE. ÉLECTRIQUE."}
