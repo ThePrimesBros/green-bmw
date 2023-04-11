@@ -4,10 +4,8 @@ import { useGetCars } from '@/hooks'
 
 export default function ProductsPage() {
     const [pageNumber, setPageNumber] = React.useState(1)
-    const page = React.useMemo(() => pageNumber, [pageNumber])
-    const perPage = React.useMemo(() => 6, [])
 
-    const { cars, isLoading, isFetchingNextPage, hasNextPage } = useGetCars(page, perPage)
+    const { cars, isLoading, isFetchingNextPage, hasNextPage } = useGetCars(pageNumber, 6)
 
     const status = React.useMemo(() => {
         if (!isLoading && cars !== []) return true
@@ -20,7 +18,7 @@ export default function ProductsPage() {
 
     return (
         <React.Fragment>
-            <div className='h-full w-full py-2 overflow-auto'>
+            <div className='h-full w-full py-2 overflow-auto px-32'>
                 <span>Products Page</span>
                 <div className='grid grid-cols-3 gap-4 grid-row-2 grid-flow-dense'>
                     {status ? cars?.map((car) => {
