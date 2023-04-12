@@ -9,9 +9,10 @@ export default function Header() {
         if (page && page.document.hasFocus()) video?.play()
         else video?.pause()
     }, [page])
+
     return (
         <React.Fragment>
-            <div className="relative h-screen bg-white" id='header'>
+            <div className="relative h-screen bg-white flex justify-center items-center w-full" id='header'>
                 <video
                     loop
                     muted
@@ -21,8 +22,8 @@ export default function Header() {
                 >
                     <source src="/bmw_vid_header.mp4" type='video/mp4' />
                 </video>
-                <h1 className="uppercase top-28 left-32 absolute text-3xl font-extrabold tracking-wider text-white w-screen">
-                    Achat de véhicules neuf ou d'occasion
+                <h1 className="uppercase text-5xl font-extrabold tracking-[3rem] text-white w-screen z-10 text-center mb-52">
+                    BMW
                 </h1>
             </div>
             <a href='#article-section' className="absolute bottom-5 left-1/2 transform -translate-x-1/2">

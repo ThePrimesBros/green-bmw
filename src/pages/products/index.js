@@ -5,29 +5,35 @@ import { useGetCars } from '@/hooks'
 export default function ProductsPage() {
     const [pageNumber, setPageNumber] = React.useState(1)
 
-    const { cars, isLoading, isFetchingNextPage, hasNextPage } = useGetCars(pageNumber, 6)
+    const { cars, isFetching } = useGetCars(pageNumber, 6)
+    const [allCars, setAllCars] = React.useState([])
 
-    const status = React.useMemo(() => {
-        if (!isLoading && cars !== []) return true
-        return false
-    }, [isLoading, cars])
+    const keepCars = React.useCallback(() => {
+        setAllCars([...allCars, ...cars])
+    }, [allCars, cars])
 
     const handleLoadMore = React.useCallback(() => {
         setPageNumber(pageNumber + 1)
-    }, [setPageNumber])
+        keepCars()
+    }, [keepCars, pageNumber])
+
+    React.useEffect(() => {
+        setAllCars(cars)
+    }, [cars])
 
     return (
         <React.Fragment>
-            <div className='h-full w-full py-2 overflow-auto px-32'>
-                <span>Products Page</span>
+            <div className='h-full w-full py-2 overflow-auto px-32 relative space-y-10'>
                 <div className='grid grid-cols-3 gap-4 grid-row-2 grid-flow-dense'>
-                    {status ? cars?.map((car) => {
+                    {!isFetching && !!allCars ? allCars?.map((car) => {
                         return <CardCard key={car.id} {...car} />
                     }) : <span>Loading...</span>}
                 </div>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleLoadMore}>
-                    Load More
-                </button>
+                <div className='w-full flex justify-center items-center'>
+                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleLoadMore}>
+                        Load More
+                    </button>
+                </div>
             </div>
         </React.Fragment>
     )
