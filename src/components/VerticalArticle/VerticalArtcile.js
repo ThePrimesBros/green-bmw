@@ -4,7 +4,7 @@ import Image from "next/image"
 const VerticalArtcile = ({ reversed, img, text, title }) => {
     return (
         <React.Fragment>
-            <div className={`md:flex h-fit w-full lg:px-52 md:px-12 px-12 ${reversed ? 'flex-row-reverse' : ''}`}>
+            <div className={`md:flex h-fit w-full lg:px-52 md:px-12 px-12 mb-12 ${reversed ? 'flex-row-reverse' : ''} md:items-center`}>
                 <div className="md:w-1/2 w-full px-5">
                     <Image src={img} alt="" width={'auto'} height={'auto'} loading="lazy" />
                 </div>
