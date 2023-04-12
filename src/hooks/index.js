@@ -1,9 +1,7 @@
 import { useQuery } from "react-query"
 import React from "react"
 
-
-const GET_ALL_CARS = '/api/car'
-
+const GET_ALL_CARS = '/cars'
 
 export const carKeys = {
     all: (pageNumber, perPage) =>
@@ -11,14 +9,17 @@ export const carKeys = {
 }
 
 export const useGetCars = (pageNumber, perPage) => {
-    const arrayOfCars = useQuery(carKeys.all(pageNumber, perPage), () => fetch(`${GET_ALL_CARS}?pageNumber=${pageNumber}&itemPerPage=${perPage}`).then(res => res.json()), {
+    const arrayOfCars = useQuery(carKeys.all(pageNumber, perPage), () =>
+        fetch(process.env.API_BASE_URL + GET_ALL_CARS + `?page=${pageNumber}&itemsPerPage=${perPage}`).then(res => res.json()), {
         keepPreviousData: true,
+        refetchOnWindowFocus: false,
     })
 
     const { data, isLoading, isError, isFetching } = arrayOfCars
 
     const cars = React.useMemo(() => {
-        return !!data ? data.data : undefined
+        // get Hydra members
+        return !!data ? data['hydra:member'] : []
     }, [data])
     return { cars, isLoading, isError, isFetching }
 }

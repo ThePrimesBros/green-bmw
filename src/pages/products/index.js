@@ -25,8 +25,8 @@ export default function ProductsPage() {
         <React.Fragment>
             <div className='h-full w-full py-2 overflow-auto px-32 relative space-y-10'>
                 <div className='grid grid-cols-3 gap-4 grid-row-2 grid-flow-dense'>
-                    {!isFetching && !!allCars ? allCars?.map((car) => {
-                        return <CardCard key={car.id} {...car} />
+                    {!isFetching && !!allCars ? allCars?.map((car, index) => {
+                        return <CardCard key={car.id} name={car.identity.name} src={car.identity.mainPicture.src} id={car.id} index={index} />
                     }) : <span>Loading...</span>}
                 </div>
                 <div className='w-full flex justify-center items-center'>
