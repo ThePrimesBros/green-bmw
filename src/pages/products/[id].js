@@ -20,7 +20,7 @@ export default function ProductPage() {
 
     car?.identity.mainPicture.src &&
       downloadImage(car.identity.mainPicture.src);
-  }, [allCars]);
+  }, [car]);
 
   return (
     <React.Fragment>
