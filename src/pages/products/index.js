@@ -19,8 +19,6 @@ export default function ProductsPage() {
   const handleLoadMore = React.useCallback(() => {
     setPageNumber(pageNumber + 1);
     keepCars();
-    //always go to the bottom of the page in react
-    scrollIntoView(document.body);
   }, [keepCars, pageNumber]);
 
   React.useEffect(() => {
