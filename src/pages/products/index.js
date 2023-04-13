@@ -29,7 +29,7 @@ export default function ProductsPage() {
     if (allCars.some((car) => cars.some((c) => c.id === car.id))) return;
     setAllCars([...allCars, ...cars]);
   }, [cars]);
-console.log(allCars)
+
   return (
     <React.Fragment>
       <Head>

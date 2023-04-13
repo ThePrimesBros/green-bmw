@@ -26,7 +26,7 @@ export default function ProductPage() {
       </Head>
       <div className="w-full lg:flex lg:items-center lg:justify-around">
         <Image
-          src={car?.images[0].src}
+          src={car?.identity.mainPicture.src}
           alt={car?.identity.name}
           width={800}
           height={600}
