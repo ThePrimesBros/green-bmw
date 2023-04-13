@@ -21,5 +21,18 @@ export const useGetCars = (pageNumber, perPage) => {
         // get Hydra members
         return !!data ? data['hydra:member'] : []
     }, [data])
-    return { cars, isLoading, isError, isFetching }
+   
+   return { cars, isLoading, isError, isFetching }
+}
+
+export const useGetCar = (id) => {
+    const car = useQuery(['car', id], () =>
+        fetch(process.env.API_BASE_URL + GET_ALL_CARS + `/${id}`).then(res => res.json()), {
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+    })
+
+    const { data, isLoading, isError, isFetching } = car
+
+    return { car: data, isLoading, isError, isFetching }
 }

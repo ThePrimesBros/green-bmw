@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function CardCard({ name, src, id, index }) {
     const router = useRouter()
     return (
-            <div className='overflow-none cursor-pointer' onClick={() => router.push(`/car/${id}`)}>
+            <div className='overflow-none cursor-pointer' onClick={() => router.push(`/products/${id}`)}>
                 <div className='relative h-48 w-full'>
                     <Image
                         src={src}

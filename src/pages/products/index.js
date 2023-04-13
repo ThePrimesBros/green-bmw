@@ -19,6 +19,8 @@ export default function ProductsPage() {
   const handleLoadMore = React.useCallback(() => {
     setPageNumber(pageNumber + 1);
     keepCars();
+    //always go to the bottom of the page in react
+    scrollIntoView(document.body);
   }, [keepCars, pageNumber]);
 
   React.useEffect(() => {
@@ -26,6 +28,8 @@ export default function ProductsPage() {
       setAllCars(cars);
       return;
     }
+    if (allCars.some((car) => cars.some((c) => c.id === car.id))) return;
+    setAllCars([...allCars, ...cars]);
   }, [cars]);
 
   return (
@@ -47,8 +51,9 @@ export default function ProductsPage() {
         <div className="grid grid-cols-1 gap-4 grid-row-2 grid-flow-dense md:grid-cols-3">
           {!isFetching && !!allCars ? (
             allCars?.map((car, index) => {
+              const delay = (index % 6 + 1) * 100;
               return (
-                <Fade up delay={index * 100} key={car.id}>
+                <Fade up delay={delay} key={car.id}>
                   <CardCard
                     name={car.identity.name}
                     src={car.identity.mainPicture.src}
@@ -73,7 +78,7 @@ export default function ProductsPage() {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={handleLoadMore}
           >
-            Load More
+            Afficher plus de voiture
           </button>
         </div>
       </div>
