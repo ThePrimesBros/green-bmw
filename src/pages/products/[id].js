@@ -8,6 +8,19 @@ export default function ProductPage() {
   const router = useRouter();
   const { id } = router.query;
   const { car } = useGetCar(id);
+  const [images, setImages] = React.useState([]);
+
+  React.useEffect(() => {
+    const downloadImage = async (url) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      setImages((prevImages) => [...prevImages, objectUrl]);
+    };
+
+    car?.identity.mainPicture.src &&
+      downloadImage(car.identity.mainPicture.src);
+  }, [allCars]);
 
   return (
     <React.Fragment>
@@ -26,7 +39,7 @@ export default function ProductPage() {
       </Head>
       <div className="w-full lg:flex lg:items-center lg:justify-around">
         <Image
-          src={car?.identity.mainPicture.src}
+          src={images[0]}
           alt={car?.identity.name}
           width={800}
           height={600}
@@ -78,7 +91,7 @@ export default function ProductPage() {
               Prix
             </h2>
             <p className="text-slate-100 font-bold">Prix: {car?.price} €</p>
-            <div className="flex flex-col sm:flex-row sm:justify-between my-3">
+            <div className="flex flex-col sm:flex-row sm:justify-between my-3 mx-5">
               <button class="bg-black text-white py-3 px-6 rounded border border-yellow-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 mb-5">
                 Acheter maintenant
               </button>

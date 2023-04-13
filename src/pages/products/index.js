@@ -7,7 +7,7 @@ import styles from "@/styles/product.module.css";
 
 export default function ProductsPage() {
   const [pageNumber, setPageNumber] = React.useState(1);
-
+  const [imgSrc, setImgSrc] = React.useState([]);
   const { cars, isFetching } = useGetCars(pageNumber, 6);
   const [allCars, setAllCars] = React.useState([]);
 
@@ -30,6 +30,21 @@ export default function ProductsPage() {
     setAllCars([...allCars, ...cars]);
   }, [cars]);
 
+  const [images, setImages] = React.useState([]);
+
+  React.useEffect(() => {
+    const downloadImage = async (url) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      setImages((prevImages) => [...prevImages, objectUrl]);
+    };
+
+    allCars?.map((car) => {
+      downloadImage(car.identity.mainPicture.src);
+    });
+  }, [allCars]);
+
   return (
     <React.Fragment>
       <Head>
@@ -49,12 +64,12 @@ export default function ProductsPage() {
         <div className="grid grid-cols-1 gap-4 grid-row-2 grid-flow-dense md:grid-cols-3">
           {!isFetching && !!allCars ? (
             allCars?.map((car, index) => {
-              const delay = (index % 6 + 1) * 100;
+              const delay = ((index % 6) + 1) * 100;
               return (
                 <Fade up delay={delay} key={car.id}>
                   <CardCard
                     name={car.identity.name}
-                    src={car.identity.mainPicture.src}
+                    src={images[index]}
                     id={car.id}
                   />
                 </Fade>
